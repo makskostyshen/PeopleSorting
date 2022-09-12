@@ -1,9 +1,7 @@
 package person.creator;
 
+import person.fields.PersonField;
 import person.Person;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class PeopleCreator {
@@ -14,21 +12,21 @@ public class PeopleCreator {
 
 
     public PeopleCreator(){
-        heightGenerator = new RandomIntegerGenerator(10, 250);
-        weightGenerator = new RandomIntegerGenerator(2, 300);
-        ageGenerator = new RandomIntegerGenerator(0, 100);
+        heightGenerator = new RandomIntegerGenerator(PersonField.MIN_HEIGHT, PersonField.MAX_HEIGHT);
+        weightGenerator = new RandomIntegerGenerator(PersonField.MIN_WEIGHT, PersonField.MAX_WEIGHT);
+        ageGenerator = new RandomIntegerGenerator(PersonField.MIN_AGE, PersonField.MAX_AGE);
     }
 
 
-    public List<Person> createPeople(int count){
-        List<Person> people = new ArrayList<>();
+    public Person[] createPeople(int count){
+        Person[] people = new Person[count];
 
         for(int i = 0; i < count; i++){
             int height = heightGenerator.getNewValue();
             int weight = weightGenerator.getNewValue();
             int age = ageGenerator.getNewValue();
 
-            people.add(new Person(height, weight, age));
+            people[i] = new Person(height, weight, age);
         }
         return people;
     }
